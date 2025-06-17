@@ -15,6 +15,7 @@ class ReviewResult:
     metrics: Dict[str, Any] = field(default_factory=dict)
     review_time: float = 0.0
     model_used: str = ""
+    tool_calls: List[Dict[str, Any]] = field(default_factory=list)
     
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -34,5 +35,6 @@ class ReviewResult:
             "summary": self.summary,
             "metrics": self.metrics,
             "review_time": self.review_time,
-            "model_used": self.model_used
+            "model_used": self.model_used,
+            "tool_calls": self.tool_calls
         }

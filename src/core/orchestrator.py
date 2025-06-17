@@ -21,12 +21,13 @@ class CodeReviewOrchestrator:
         "anthropic": "claude-3-5-sonnet-20241022"
     }
     
-    def __init__(self, provider: str = "openai", model: Optional[str] = None, **kwargs):
+    def __init__(self, provider: str = "openai", model: Optional[str] = None, enable_tools: bool = True, **kwargs):
         """Initialize with specified provider
         
         Args:
             provider: "anthropic" or "openai" (default: "openai")
             model: Model name to use, or None for provider default
+            enable_tools: Whether to enable tool usage (default: True)
             **kwargs: Additional arguments passed to the agent (api_key, etc.)
         """
         # Default to OpenAI if not specified
@@ -38,8 +39,9 @@ class CodeReviewOrchestrator:
             if model is None:
                 raise ValueError(f"No default model for provider: {provider}")
         
-        # Pass model to kwargs
+        # Pass model and enable_tools to kwargs
         kwargs['model'] = model
+        kwargs['enable_tools'] = enable_tools
         
         if provider == "anthropic":
             self.agent = AnthropicReviewAgent(**kwargs)
@@ -50,6 +52,7 @@ class CodeReviewOrchestrator:
         
         self.provider = provider
         self.model = model
+        self.enable_tools = enable_tools
         self.results_history = []
     
     def review_file(self, file_path: str) -> ReviewResult:
