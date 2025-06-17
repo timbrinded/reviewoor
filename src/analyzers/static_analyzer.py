@@ -4,15 +4,20 @@ import ast
 import re
 from typing import List
 
+import agentops
+from agentops import track_agent, operation as track_function
+
 from ..models import CodeIssue, Severity
 
 
+@track_agent(name="CodeAnalyzer")
 class CodeAnalyzer:
     """Static code analyzer for Python - provides baseline analysis"""
     
     def __init__(self):
         self.issues = []
     
+    @track_function(name="static_analyze")
     def analyze(self, code: str) -> List[CodeIssue]:
         """Perform static analysis on Python code"""
         self.issues = []

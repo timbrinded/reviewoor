@@ -7,6 +7,9 @@ import logging
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional, Tuple
 
+import agentops
+from agentops import track_agent, operation as track_function
+
 from ..models import CodeIssue, ReviewResult, Severity
 from ..analyzers import CodeAnalyzer
 from ..tools import (
@@ -18,6 +21,7 @@ from ..tools import (
 logger = logging.getLogger(__name__)
 
 
+@track_agent(name="BaseCodeReviewAgent")
 class BaseCodeReviewAgent(ABC):
     """Abstract base class for code review agents"""
     
@@ -123,6 +127,7 @@ Format your final response as a JSON object with this structure:
         """Call the specific AI model with tools - to be implemented by subclasses"""
         pass
     
+    @track_function(name="review_code")
     def review_code(self, code: str, file_path: str = "unknown.py") -> ReviewResult:
         """Review Python code and return detailed results"""
         start_time = time.time()
@@ -239,6 +244,7 @@ Format your final response as a JSON object with this structure:
                 "metrics": {}
             }
     
+    @track_function(name="deduplicate_issues")
     def _deduplicate_issues(self, issues: List[CodeIssue]) -> List[CodeIssue]:
         """Remove duplicate issues based on message and line number"""
         seen = set()
@@ -257,6 +263,7 @@ Format your final response as a JSON object with this structure:
         
         return unique_issues
     
+    @track_function(name="execute_tool")
     def execute_tool(self, tool_name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
         """Execute a tool with the given arguments"""
         if tool_name not in self.available_tools:

@@ -5,6 +5,9 @@ import logging
 import json
 from typing import Optional, List, Dict, Any, Tuple
 
+import agentops
+from agentops import track_agent, operation as track_function
+
 from .base import BaseCodeReviewAgent
 
 logger = logging.getLogger(__name__)
@@ -16,6 +19,7 @@ except ImportError:
     logger.warning("anthropic package not installed")
 
 
+@track_agent(name="AnthropicReviewAgent")
 class AnthropicReviewAgent(BaseCodeReviewAgent):
     """Code review agent using Anthropic's Claude"""
     
@@ -27,6 +31,7 @@ class AnthropicReviewAgent(BaseCodeReviewAgent):
         self.client = anthropic.Anthropic(api_key=api_key or os.getenv("ANTHROPIC_API_KEY"))
         self.model = model
     
+    @track_function(name="anthropic_call_model")
     def _call_model(self, prompt: str) -> str:
         response = self.client.messages.create(
             model=self.model,
@@ -40,6 +45,7 @@ class AnthropicReviewAgent(BaseCodeReviewAgent):
         # The content is typically a TextBlock with a text attribute
         return getattr(content, 'text', str(content))
     
+    @track_function(name="anthropic_call_model_with_tools")
     def _call_model_with_tools(self, prompt: str, tools: List[Dict[str, Any]]) -> Tuple[str, List[Dict[str, Any]]]:
         """Call Anthropic model with tool support"""
         tool_calls_made = []

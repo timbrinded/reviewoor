@@ -5,6 +5,9 @@ import logging
 import json
 from typing import Optional, Any, Dict, List, Tuple
 
+import agentops
+from agentops import track_agent, operation as track_function
+
 from .base import BaseCodeReviewAgent
 
 logger = logging.getLogger(__name__)
@@ -16,6 +19,7 @@ except ImportError:
     logger.warning("openai package not installed")
 
 
+@track_agent(name="OpenAIReviewAgent")
 class OpenAIReviewAgent(BaseCodeReviewAgent):
     """Code review agent using OpenAI's GPT"""
 
@@ -27,6 +31,7 @@ class OpenAIReviewAgent(BaseCodeReviewAgent):
         self.client = openai.OpenAI(api_key=api_key or os.getenv("OPENAI_API_KEY"))
         self.model = model
 
+    @track_function(name="openai_call_model")
     def _call_model(self, prompt: str) -> str:
         # Special handling for o3-pro models which use the responses endpoint
         if "o3-pro" in self.model:
@@ -84,6 +89,7 @@ class OpenAIReviewAgent(BaseCodeReviewAgent):
             return ""
         return content
     
+    @track_function(name="openai_call_model_with_tools")
     def _call_model_with_tools(self, prompt: str, tools: List[Dict[str, Any]]) -> Tuple[str, List[Dict[str, Any]]]:
         """Call OpenAI model with tool support"""
         tool_calls_made = []

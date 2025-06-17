@@ -6,12 +6,16 @@ import glob
 import logging
 from typing import List, Dict, Any, Optional
 
+import agentops
+from agentops import track_agent, operation as track_function
+
 from ..models import ReviewResult, Severity
 from ..agents import AnthropicReviewAgent, OpenAIReviewAgent
 
 logger = logging.getLogger(__name__)
 
 
+@track_agent(name="CodeReviewOrchestrator")
 class CodeReviewOrchestrator:
     """Orchestrates code reviews across multiple files and providers"""
     
@@ -55,6 +59,7 @@ class CodeReviewOrchestrator:
         self.enable_tools = enable_tools
         self.results_history = []
     
+    @track_function(name="review_file")
     def review_file(self, file_path: str) -> ReviewResult:
         """Review a single Python file"""
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -64,12 +69,14 @@ class CodeReviewOrchestrator:
         self.results_history.append(result)
         return result
     
+    @track_function(name="review_code_string")
     def review_code_string(self, code: str, identifier: str = "snippet") -> ReviewResult:
         """Review a code string directly"""
         result = self.agent.review_code(code, identifier)
         self.results_history.append(result)
         return result
     
+    @track_function(name="review_directory")
     def review_directory(self, directory: str, pattern: str = "*.py") -> List[ReviewResult]:
         """Review all Python files in a directory"""
         results = []
@@ -85,6 +92,7 @@ class CodeReviewOrchestrator:
         
         return results
     
+    @track_function(name="get_summary_report")
     def get_summary_report(self) -> Dict[str, Any]:
         """Generate a summary report of all reviews"""
         if not self.results_history:
@@ -116,6 +124,7 @@ class CodeReviewOrchestrator:
             "models_used": list(set(r.model_used for r in self.results_history))
         }
     
+    @track_function(name="export_results")
     def export_results(self, output_file: str = "review_results.json"):
         """Export all results to JSON file"""
         data = {
