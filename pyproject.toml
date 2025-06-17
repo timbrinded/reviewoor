@@ -21,3 +21,12 @@ venvPath = "."
 venv = ".venv"
 include = ["agentops", "examples"]
 exclude = ["**/__pycache__", ".venv"]
+
+[tool.ruff]
+exclude = [
+    ".venv",
+    "__pycache__",
+    "examples",
+    "output",
+    "example.py",
+]
