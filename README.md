@@ -80,11 +80,15 @@ source .env
 ```python
 from src import CodeReviewOrchestrator
 
-# Initialize with Anthropic (default)
+# Initialize with default (OpenAI GPT-4)
+orchestrator = CodeReviewOrchestrator()
+
+# Use Anthropic Claude
 orchestrator = CodeReviewOrchestrator(provider="anthropic")
 
-# Or use OpenAI
-orchestrator = CodeReviewOrchestrator(provider="openai")
+# Use specific models
+orchestrator = CodeReviewOrchestrator(model="gpt-3.5-turbo")
+orchestrator = CodeReviewOrchestrator(provider="anthropic", model="claude-3-haiku-20240307")
 
 # Review a single file
 result = orchestrator.review_file("path/to/your/file.py")

@@ -6,6 +6,11 @@ This example shows how to review all Python files in a directory.
 
 import os
 import sys
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src import CodeReviewOrchestrator
@@ -18,11 +23,8 @@ def main():
         print("⚠️  No API key found. Please set ANTHROPIC_API_KEY or OPENAI_API_KEY in your .env file")
         return
     
-    # Determine which provider to use
-    provider = "anthropic" if os.getenv("ANTHROPIC_API_KEY") else "openai"
-    
-    # Initialize the orchestrator
-    orchestrator = CodeReviewOrchestrator(provider=provider)
+    # Initialize the orchestrator (defaults to OpenAI)
+    orchestrator = CodeReviewOrchestrator()
     
     # Review the src directory
     src_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "src")

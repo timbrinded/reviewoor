@@ -4,7 +4,7 @@ import os
 import json
 import glob
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 from ..models import ReviewResult, Severity
 from ..agents import AnthropicReviewAgent, OpenAIReviewAgent
@@ -15,20 +15,41 @@ logger = logging.getLogger(__name__)
 class CodeReviewOrchestrator:
     """Orchestrates code reviews across multiple files and providers"""
     
-    def __init__(self, provider: str = "anthropic", **kwargs):
+    # Default models for each provider
+    DEFAULT_MODELS = {
+        "openai": "gpt-4",
+        "anthropic": "claude-3-5-sonnet-20241022"
+    }
+    
+    def __init__(self, provider: str = "openai", model: Optional[str] = None, **kwargs):
         """Initialize with specified provider
         
         Args:
-            provider: "anthropic" or "openai"
-            **kwargs: Additional arguments passed to the agent (api_key, model, etc.)
+            provider: "anthropic" or "openai" (default: "openai")
+            model: Model name to use, or None for provider default
+            **kwargs: Additional arguments passed to the agent (api_key, etc.)
         """
+        # Default to OpenAI if not specified
+        provider = provider.lower()
+        
+        # Use default model if not specified
+        if model is None:
+            model = self.DEFAULT_MODELS.get(provider)
+            if model is None:
+                raise ValueError(f"No default model for provider: {provider}")
+        
+        # Pass model to kwargs
+        kwargs['model'] = model
+        
         if provider == "anthropic":
             self.agent = AnthropicReviewAgent(**kwargs)
         elif provider == "openai":
             self.agent = OpenAIReviewAgent(**kwargs)
         else:
-            raise ValueError(f"Unknown provider: {provider}")
+            raise ValueError(f"Unknown provider: {provider}. Supported: 'openai', 'anthropic'")
         
+        self.provider = provider
+        self.model = model
         self.results_history = []
     
     def review_file(self, file_path: str) -> ReviewResult:

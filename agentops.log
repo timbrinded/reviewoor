@@ -1,0 +1,6 @@
+2025-06-17 12:52:26,428 - INFO - [ConcurrentFuturesInstrumentor] Successfully instrumented concurrent.futures.ThreadPoolExecutor
+2025-06-17 12:52:26,428 - INFO - AgentOps: Successfully instrumented 'ConcurrentFuturesInstrumentor' for package 'python'.
+2025-06-17 12:52:26,435 - INFO - AgentOps: Successfully instrumented 'AnthropicInstrumentor' for package 'agentops.instrumentation.anthropic'.
+2025-06-17 12:52:26,623 - INFO - AgentOps: Successfully instrumented 'OpenAIInstrumentor' for package 'agentops.instrumentation.openai'.
+2025-06-17 12:52:26,624 - INFO - Session Replay for default trace: https://app.agentops.ai/sessions?trace_id=c198772ea88622e291e3320ae519238f
+2025-06-17 12:52:49,652 - INFO - Session Replay for default.session trace: https://app.agentops.ai/sessions?trace_id=c198772ea88622e291e3320ae519238f

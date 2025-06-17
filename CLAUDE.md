@@ -101,12 +101,28 @@ All generated output files (JSON results) are saved to the `output/` directory, 
 
 ## API Keys and Configuration
 
-- Set `ANTHROPIC_API_KEY` environment variable for Claude reviews
-- Set `OPENAI_API_KEY` environment variable for GPT reviews
+- Create a `.env` file in the project root with your API keys:
+  - `OPENAI_API_KEY=your-openai-key` for OpenAI GPT reviews (default provider)
+  - `ANTHROPIC_API_KEY=your-anthropic-key` for Anthropic Claude reviews
+- The examples automatically load the `.env` file using python-dotenv
 - API keys are read from environment in the agent implementations
-- Default provider is "anthropic" but can be specified in CodeReviewOrchestrator constructor
+- Default provider is now "openai" (changed from "anthropic")
+- Provider and model can be specified in CodeReviewOrchestrator constructor:
+  - `CodeReviewOrchestrator()` - Uses OpenAI with GPT-4
+  - `CodeReviewOrchestrator(provider="anthropic")` - Uses Anthropic with Claude 3.5 Sonnet
+  - `CodeReviewOrchestrator(model="gpt-3.5-turbo")` - Uses OpenAI with GPT-3.5 Turbo
+  - `CodeReviewOrchestrator(provider="anthropic", model="claude-3-haiku-20240307")` - Uses specific Anthropic model
 
 ## Known Issues and Solutions
+
+### O3 Model Support
+- O3 models (o3-mini, o3) require using `max_completion_tokens` instead of `max_tokens`
+- O3-pro models (e.g., o3-pro-2025-06-10) use the responses endpoint with:
+  - `input` parameter instead of `messages`
+  - `max_output_tokens` instead of `max_completion_tokens`
+- The OpenAI agent automatically detects the model type and uses the correct endpoint/parameters
+- If the responses endpoint fails, it falls back to chat completions with `max_completion_tokens`
+- O3-pro models take significantly longer to process (30-60+ seconds)
 
 ### Template String Formatting
 When using Python's `.format()` with templates containing JSON, remember to escape literal curly braces by doubling them:

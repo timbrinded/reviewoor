@@ -6,6 +6,11 @@ This example shows how to review existing Python files.
 
 import os
 import sys
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src import CodeReviewOrchestrator
@@ -18,11 +23,8 @@ def main():
         print("⚠️  No API key found. Please set ANTHROPIC_API_KEY or OPENAI_API_KEY in your .env file")
         return
     
-    # Determine which provider to use
-    provider = "anthropic" if os.getenv("ANTHROPIC_API_KEY") else "openai"
-    
-    # Initialize the orchestrator
-    orchestrator = CodeReviewOrchestrator(provider=provider)
+    # Initialize the orchestrator (defaults to OpenAI)
+    orchestrator = CodeReviewOrchestrator()
     
     # Review a specific file (let's review the example.py file)
     file_to_review = os.path.join(os.path.dirname(os.path.dirname(__file__)), "example.py")

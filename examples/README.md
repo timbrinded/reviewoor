@@ -85,6 +85,38 @@ uv run 05_custom_review.py
 uv run 06_security_focused.py
 ```
 
+### 07_model_selection.py
+**Model Selection** - Demonstrates provider and model flexibility
+- Shows how to use different providers (OpenAI, Anthropic)
+- Demonstrates selecting specific models
+- Lists available models for each provider
+- Explains speed/quality/cost tradeoffs
+
+```bash
+uv run 07_model_selection.py
+```
+
+### 08_cli_interface.py
+**CLI Interface** - Command-line interface with runtime arguments
+- Accepts provider and model as command-line arguments
+- Includes `--anthropic` flag for easy provider switching
+- Can review files specified on command line
+- Shows how to build a CLI tool with the library
+
+```bash
+# Use default (OpenAI GPT-4)
+uv run 08_cli_interface.py
+
+# Use Anthropic
+uv run 08_cli_interface.py --anthropic
+
+# Use specific model
+uv run 08_cli_interface.py --model gpt-3.5-turbo
+
+# Review a specific file with Anthropic
+uv run 08_cli_interface.py -a -f ../example.py
+```
+
 ## Running All Examples
 
 To run all examples sequentially:

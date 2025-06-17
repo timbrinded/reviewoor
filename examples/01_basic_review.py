@@ -5,7 +5,13 @@ This example shows the simplest way to review Python code using the agent.
 """
 
 import os
+import agentops
 import sys
+from dotenv import load_dotenv
+
+# Load .env file
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src import CodeReviewOrchestrator
@@ -38,6 +44,12 @@ def process_user_input():
 def main():
     print("=== Basic Code Review Example ===\n")
     
+    AGENTOPS_API_KEY = os.getenv("AGENTOPS_API_KEY") or 'a0aac5f4-2b60-43c2-bb9e-f79247f5a2dc'
+    agentops.init(
+    api_key=AGENTOPS_API_KEY,
+    default_tags=['openai assistants']
+)
+
     # Check if API key is set
     if not os.getenv("ANTHROPIC_API_KEY") and not os.getenv("OPENAI_API_KEY"):
         print("⚠️  No API key found. Please set ANTHROPIC_API_KEY or OPENAI_API_KEY in your .env file")
@@ -53,12 +65,9 @@ def main():
             print(f"  Line {issue.line_number}: [{issue.severity.value}] {issue.message}")
         return
     
-    # Determine which provider to use
-    provider = "anthropic" if os.getenv("ANTHROPIC_API_KEY") else "openai"
-    print(f"Using {provider} for AI-powered review\n")
-    
-    # Initialize the orchestrator
-    orchestrator = CodeReviewOrchestrator(provider=provider)
+    # Initialize the orchestrator (defaults to OpenAI)
+    orchestrator = CodeReviewOrchestrator()
+    print(f"Using {orchestrator.provider} ({orchestrator.model}) for AI-powered review\n")
     
     # Review the code
     print("Reviewing code...")

@@ -6,6 +6,11 @@ This example shows how to use different AI providers and compare results.
 
 import os
 import sys
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src import CodeReviewOrchestrator, AnthropicReviewAgent, OpenAIReviewAgent

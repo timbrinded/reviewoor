@@ -6,6 +6,11 @@ This example demonstrates reviewing code specifically for security vulnerabiliti
 
 import os
 import sys
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src import CodeReviewOrchestrator
@@ -127,11 +132,10 @@ def main():
             print(f"\n[{issue.severity.value}] Line {issue.line_number}: {issue.message}")
         return
     
-    # Use AI-powered review
-    provider = "anthropic" if os.getenv("ANTHROPIC_API_KEY") else "openai"
-    orchestrator = CodeReviewOrchestrator(provider=provider)
+    # Use AI-powered review (defaults to OpenAI)
+    orchestrator = CodeReviewOrchestrator()
     
-    print(f"🔍 Performing security review with {provider}...")
+    print(f"🔍 Performing security review with {orchestrator.provider} ({orchestrator.model})...")
     result = orchestrator.review_code_string(insecure_code, "insecure_app.py")
     
     # Filter for security issues
