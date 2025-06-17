@@ -19,5 +19,5 @@ dev = [
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
-include = ["agentops", "example.py"]
+include = ["agentops", "examples"]
 exclude = ["**/__pycache__", ".venv"]

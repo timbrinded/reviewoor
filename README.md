@@ -129,6 +129,20 @@ for issue in issues:
 
 ## Examples
 
+For comprehensive examples, check out the `examples/` directory which contains:
+- `01_basic_review.py` - Basic code review demonstration
+- `02_file_review.py` - Review existing Python files
+- `03_directory_review.py` - Review entire directories
+- `04_static_analysis_only.py` - Static analysis without API keys
+- `05_custom_review.py` - Compare different AI providers
+- `06_security_focused.py` - Security vulnerability detection
+
+Run all examples:
+```bash
+cd examples
+./run_all.sh
+```
+
 ### Example 1: Quick Code Review
 
 ```python

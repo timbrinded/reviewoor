@@ -38,7 +38,7 @@ ruff format src/
 pytest
 ```
 
-### Running the Example
+### Running Examples
 ```bash
 # Set up API keys using .env file
 cp .env.example .env
@@ -47,8 +47,11 @@ cp .env.example .env
 # Source the .env file
 source .env
 
-# Run the example code review
-python example.py
+# Run a specific example
+python examples/01_basic_review.py
+
+# Or run all examples
+cd examples && ./run_all.sh
 ```
 
 ## Architecture
