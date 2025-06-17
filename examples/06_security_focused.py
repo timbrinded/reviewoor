@@ -207,7 +207,9 @@ def main():
     print("  - Avoid dangerous functions like eval(), exec(), pickle.load()")
     
     # Export results
-    output_file = "security_review_results.json"
+    output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "output")
+    os.makedirs(output_dir, exist_ok=True)
+    output_file = os.path.join(output_dir, "security_review_results.json")
     orchestrator.export_results(output_file)
     print(f"\n💾 Full security review exported to: {output_file}")
 

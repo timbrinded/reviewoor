@@ -37,23 +37,23 @@ Please provide:
 5. Suggestions for improvement
 
 Format your response as a JSON object with this structure:
-{
+{{
     "issues": [
-        {
+        {{
             "severity": "critical|high|medium|low|info",
             "category": "Bug|Security|Performance|Design|Style|Documentation",
             "message": "Clear description of the issue",
             "line_number": null or integer,
             "suggestion": "How to fix it"
-        }
+        }}
     ],
     "summary": "Brief overall assessment of the code quality",
-    "metrics": {
+    "metrics": {{
         "complexity_score": 1-10,
         "maintainability_score": 1-10,
         "security_score": 1-10
-    }
-}
+    }}
+}}
 
 Focus on significant issues that would actually impact code quality or functionality."""
     
@@ -154,7 +154,12 @@ Focus on significant issues that would actually impact code quality or functiona
         unique_issues = []
         
         for issue in issues:
-            key = (issue.message, issue.line_number, issue.category)
+            # Convert line_number to a hashable type
+            line_num = issue.line_number
+            if isinstance(line_num, list):
+                line_num = tuple(line_num) if line_num else None
+            
+            key = (issue.message, line_num, issue.category)
             if key not in seen:
                 seen.add(key)
                 unique_issues.append(issue)

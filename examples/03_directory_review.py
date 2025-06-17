@@ -97,7 +97,9 @@ def main():
             print(f"  - {metric}: {score:.1f}/10")
     
     # Export results
-    output_file = "directory_review_results.json"
+    output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "output")
+    os.makedirs(output_dir, exist_ok=True)
+    output_file = os.path.join(output_dir, "directory_review_results.json")
     orchestrator.export_results(output_file)
     print(f"\n💾 Full results exported to: {output_file}")
 

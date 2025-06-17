@@ -47,12 +47,21 @@ cp .env.example .env
 # Source the .env file
 source .env
 
-# Run a specific example
-python examples/01_basic_review.py
+# Run a specific example using uv
+uv run examples/01_basic_review.py
 
 # Or run all examples
 cd examples && ./run_all.sh
 ```
+
+### Important: Using the uv Ecosystem
+This project uses `uv` for package management. Always use `uv run` to execute Python scripts:
+- `uv run script.py` - Run a Python script
+- `uv pip install -e .` - Install the package in development mode
+- Never use plain `python` commands - always prefix with `uv run`
+
+### Output Files
+All generated output files (JSON results) are saved to the `output/` directory, which is gitignored. This keeps the repository clean and prevents committing potentially large result files.
 
 ## Architecture
 
@@ -96,3 +105,21 @@ cd examples && ./run_all.sh
 - Set `OPENAI_API_KEY` environment variable for GPT reviews
 - API keys are read from environment in the agent implementations
 - Default provider is "anthropic" but can be specified in CodeReviewOrchestrator constructor
+
+## Known Issues and Solutions
+
+### Template String Formatting
+When using Python's `.format()` with templates containing JSON, remember to escape literal curly braces by doubling them:
+- `{{` for literal `{`
+- `}}` for literal `}`
+- Single braces `{variable}` for format placeholders
+
+This is particularly important in the review prompt templates that contain JSON examples.
+
+### Issue Deduplication
+The `_deduplicate_issues` method in `base.py` must handle cases where `line_number` might be:
+- An integer (normal case)
+- `None` (for general issues without specific line numbers)
+- A list (if the AI returns multiple line numbers)
+
+Always convert non-hashable types to hashable ones before using them in set operations.

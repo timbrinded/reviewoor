@@ -36,7 +36,7 @@ for example in [0-9]*.py; do
     echo "▶️  Running $example"
     echo "-----------------------------------"
     
-    if python "$example"; then
+    if uv run "$example"; then
         echo "✅ $example completed successfully"
     else
         echo "❌ $example failed"
@@ -60,12 +60,16 @@ echo "Failed: $failed"
 echo ""
 
 # List any output files created
-echo "📁 Output files created:"
-for file in *.json; do
-    if [ -f "$file" ]; then
-        echo "   - $file"
-    fi
-done
+echo "📁 Output files created in ../output/:"
+if [ -d "../output" ]; then
+    for file in ../output/*.json; do
+        if [ -f "$file" ]; then
+            echo "   - $(basename "$file")"
+        fi
+    done
+else
+    echo "   (no output directory found)"
+fi
 
 echo ""
 echo "✨ All examples completed!"

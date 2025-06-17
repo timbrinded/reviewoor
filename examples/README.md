@@ -27,7 +27,7 @@ This directory contains runnable examples demonstrating different features of th
 - Shows code metrics and summary
 
 ```bash
-python 01_basic_review.py
+uv run 01_basic_review.py
 ```
 
 ### 02_file_review.py
@@ -38,7 +38,7 @@ python 01_basic_review.py
 - Demonstrates the file review API
 
 ```bash
-python 02_file_review.py
+uv run 02_file_review.py
 ```
 
 ### 03_directory_review.py
@@ -49,7 +49,7 @@ python 02_file_review.py
 - Shows aggregate metrics across all files
 
 ```bash
-python 03_directory_review.py
+uv run 03_directory_review.py
 ```
 
 ### 04_static_analysis_only.py
@@ -60,7 +60,7 @@ python 03_directory_review.py
 - No API keys required!
 
 ```bash
-python 04_static_analysis_only.py
+uv run 04_static_analysis_only.py
 ```
 
 ### 05_custom_review.py
@@ -71,7 +71,7 @@ python 04_static_analysis_only.py
 - Requires at least one API key (works best with both)
 
 ```bash
-python 05_custom_review.py
+uv run 05_custom_review.py
 ```
 
 ### 06_security_focused.py
@@ -82,7 +82,7 @@ python 05_custom_review.py
 - Shows security score and best practices
 
 ```bash
-python 06_security_focused.py
+uv run 06_security_focused.py
 ```
 
 ## Running All Examples
@@ -94,7 +94,7 @@ To run all examples sequentially:
 for example in *.py; do
     if [ "$example" != "__init__.py" ]; then
         echo "Running $example..."
-        python "$example"
+        uv run "$example"
         echo -e "\n---\n"
     fi
 done
@@ -109,11 +109,11 @@ done
 
 ## Output Files
 
-Some examples create output files:
-- `file_review_results.json` - From example 02
-- `directory_review_results.json` - From example 03
-- `anthropic_review_results.json` - From example 05 (if using Anthropic)
-- `openai_review_results.json` - From example 05 (if using OpenAI)
-- `security_review_results.json` - From example 06
+All output files are saved to the `output/` directory (which is gitignored):
+- `output/file_review_results.json` - From example 02
+- `output/directory_review_results.json` - From example 03
+- `output/anthropic_review_results.json` - From example 05 (if using Anthropic)
+- `output/openai_review_results.json` - From example 05 (if using OpenAI)
+- `output/security_review_results.json` - From example 06
 
-These files contain detailed review results in JSON format for further processing.
+These files contain detailed review results in JSON format for further processing. The output directory is not committed to git.
