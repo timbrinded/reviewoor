@@ -16,7 +16,7 @@ from dataclasses import dataclass, asdict
 from dotenv import load_dotenv
 
 # Suppress INFO logs from httpx
-logging.getLogger("httpx").setLevel(logging.INFO)
+logging.getLogger("httpx").setLevel(logging.WARN)
 
 # Load environment variables
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))

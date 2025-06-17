@@ -1,6 +1,28 @@
-2025-06-17 16:37:49,510 - INFO - [ConcurrentFuturesInstrumentor] Successfully instrumented concurrent.futures.ThreadPoolExecutor
-2025-06-17 16:37:49,510 - INFO - AgentOps: Successfully instrumented 'ConcurrentFuturesInstrumentor' for package 'python'.
-2025-06-17 16:37:49,525 - INFO - AgentOps: Successfully instrumented 'AnthropicInstrumentor' for package 'agentops.instrumentation.anthropic'.
-2025-06-17 16:37:49,678 - INFO - AgentOps: Successfully instrumented 'OpenAIInstrumentor' for package 'agentops.instrumentation.openai'.
-2025-06-17 16:37:49,680 - INFO - Session Replay for default trace: https://app.agentops.ai/sessions?trace_id=df4afd7472c800d3d1b543c6244ea52b
-2025-06-17 16:37:49,680 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=df4afd7472c800d3d1b543c6244ea52b
+2025-06-17 16:39:13,092 - INFO - [ConcurrentFuturesInstrumentor] Successfully instrumented concurrent.futures.ThreadPoolExecutor
+2025-06-17 16:39:13,093 - INFO - AgentOps: Successfully instrumented 'ConcurrentFuturesInstrumentor' for package 'python'.
+2025-06-17 16:39:13,108 - INFO - AgentOps: Successfully instrumented 'AnthropicInstrumentor' for package 'agentops.instrumentation.anthropic'.
+2025-06-17 16:39:13,262 - INFO - AgentOps: Successfully instrumented 'OpenAIInstrumentor' for package 'agentops.instrumentation.openai'.
+2025-06-17 16:39:13,263 - INFO - Session Replay for default trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:39:13,264 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:41:12,827 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:41:12,827 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:42:24,534 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:42:24,535 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:43:46,259 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:43:46,260 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:44:04,786 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:44:04,787 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:44:43,882 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:44:43,884 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:46:35,983 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:46:35,985 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:48:08,449 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:48:08,451 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:50:09,411 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:50:09,414 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:52:23,555 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:52:23,557 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:53:46,899 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:53:46,900 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:53:50,516 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
+2025-06-17 16:53:51,369 - INFO - Session Replay for default.session trace: https://app.agentops.ai/sessions?trace_id=d2b07457f86b84bf4def90019ed7d51c
