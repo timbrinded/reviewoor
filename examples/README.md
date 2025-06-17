@@ -117,6 +117,19 @@ uv run 08_cli_interface.py --model gpt-3.5-turbo
 uv run 08_cli_interface.py -a -f ../example.py
 ```
 
+### 09_model_benchmark.py
+**Model Benchmarking** - Compare model performance and accuracy
+- Tests multiple models on standardized code review tasks
+- Measures accuracy, precision, recall, and F1 scores
+- Tracks response times and issue detection rates
+- Integrates with AgentOps for detailed analytics
+- Exports results for further analysis
+
+```bash
+# Run the benchmark suite
+uv run 09_model_benchmark.py
+```
+
 ## Running All Examples
 
 To run all examples sequentially:

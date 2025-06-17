@@ -10,6 +10,7 @@ from .models import Severity, CodeIssue, ReviewResult
 from .analyzers import CodeAnalyzer
 from .agents import BaseCodeReviewAgent, AnthropicReviewAgent, OpenAIReviewAgent
 from .core import CodeReviewOrchestrator
+from .evaluation import CodeReviewBenchmark, quick_benchmark
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -32,4 +33,8 @@ __all__ = [
     
     # Core
     "CodeReviewOrchestrator",
+    
+    # Evaluation
+    "CodeReviewBenchmark",
+    "quick_benchmark",
 ]

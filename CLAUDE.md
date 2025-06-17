@@ -74,6 +74,8 @@ All generated output files (JSON results) are saved to the `output/` directory, 
   - Provider-specific implementations inherit from BaseCodeReviewAgent
 - **src/core/**: Orchestration layer for managing reviews across files
   - `orchestrator.py`: CodeReviewOrchestrator handles file/directory reviews and result aggregation
+- **src/evaluation/**: Model benchmarking and evaluation framework
+  - `benchmark.py`: Comprehensive benchmarking system with accuracy metrics
 
 ### Key Components
 
@@ -104,6 +106,7 @@ All generated output files (JSON results) are saved to the `output/` directory, 
 - Create a `.env` file in the project root with your API keys:
   - `OPENAI_API_KEY=your-openai-key` for OpenAI GPT reviews (default provider)
   - `ANTHROPIC_API_KEY=your-anthropic-key` for Anthropic Claude reviews
+  - `AGENTOPS_API_KEY=your-agentops-key` for tracking and analytics (optional, defaults provided)
 - The examples automatically load the `.env` file using python-dotenv
 - API keys are read from environment in the agent implementations
 - Default provider is now "openai" (changed from "anthropic")
@@ -112,6 +115,43 @@ All generated output files (JSON results) are saved to the `output/` directory, 
   - `CodeReviewOrchestrator(provider="anthropic")` - Uses Anthropic with Claude 3.5 Sonnet
   - `CodeReviewOrchestrator(model="gpt-3.5-turbo")` - Uses OpenAI with GPT-3.5 Turbo
   - `CodeReviewOrchestrator(provider="anthropic", model="claude-3-haiku-20240307")` - Uses specific Anthropic model
+
+## Model Evaluation and Benchmarking
+
+The project includes a comprehensive evaluation framework for comparing model performance:
+
+### Using the Evaluation Framework
+
+```python
+from src.evaluation import quick_benchmark
+
+# Run benchmark with default models
+results = quick_benchmark()
+
+# Or use custom models
+results = quick_benchmark([
+    ("openai", "gpt-4"),
+    ("openai", "gpt-3.5-turbo"),
+    ("anthropic", "claude-3-5-sonnet-20241022")
+])
+```
+
+### AgentOps Integration
+
+All benchmarks are tracked with AgentOps, providing:
+- Token usage and cost analysis per model
+- Response time distributions
+- Error rates and types
+- Model-specific performance patterns
+
+View results at: https://app.agentops.ai
+
+### Metrics Tracked
+
+- **Accuracy Metrics**: Precision, Recall, F1 Score
+- **Performance**: Response time, tokens used
+- **Issue Detection**: Total issues, severity distribution
+- **Cost Analysis**: Via AgentOps dashboard
 
 ## Known Issues and Solutions
 
