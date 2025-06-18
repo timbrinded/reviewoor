@@ -155,6 +155,11 @@ View results at: https://app.agentops.ai
 
 ## Known Issues and Solutions
 
+### DeepEval Browser Opening
+- DeepEval automatically opens browser when running evaluations by default
+- To disable this, the examples set `os.environ["CI"] = "true"` which makes DeepEval think it's running in CI
+- The link to results is still printed but won't auto-open in browser
+
 ### O3 Model Support
 - O3 models (o3-mini, o3) require using `max_completion_tokens` instead of `max_tokens`
 - O3-pro models (e.g., o3-pro-2025-06-10) use the responses endpoint with:

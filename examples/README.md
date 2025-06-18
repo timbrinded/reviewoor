@@ -130,6 +130,32 @@ uv run 08_cli_interface.py -a -f ../example.py
 uv run 09_model_benchmark.py
 ```
 
+### 10_deepeval_benchmark.py
+**DeepEval Framework Benchmarking** - Advanced LLM-based evaluation
+- Uses DeepEval framework for sophisticated evaluation
+- Custom G-Eval metrics for code review accuracy and completeness
+- LLM-based evaluation for nuanced quality assessment
+- Compares multiple models using advanced metrics
+- Shows both detection capability and review quality
+
+```bash
+# Run DeepEval benchmark (requires deepeval package)
+uv run 10_deepeval_benchmark.py
+```
+
+### 11_deepeval_simple.py
+**Simplified DeepEval Example** - Easy introduction to DeepEval
+- Simple example of using DeepEval for code review evaluation
+- Shows how to create custom evaluation metrics
+- Demonstrates scoring and reasoning capabilities
+- Perfect starting point for DeepEval integration
+- Includes detailed output and explanations
+
+```bash
+# Run simple DeepEval example
+uv run 11_deepeval_simple.py
+```
+
 ## Running All Examples
 
 To run all examples sequentially:

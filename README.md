@@ -65,6 +65,8 @@ cp .env.example .env
 # The file should contain:
 # ANTHROPIC_API_KEY=your-anthropic-api-key
 # OPENAI_API_KEY=your-openai-api-key
+# AGENTOPS_API_KEY=your-agentops-api-key (optional, for tracking)
+# CONFIDENT_API_KEY=your-confident-api-key (optional, for DeepEval)
 ```
 
 Then source the `.env` file before running the application:

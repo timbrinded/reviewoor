@@ -1,8 +1,39 @@
-2025-06-17 20:39:23,790 - INFO - [ConcurrentFuturesInstrumentor] Successfully instrumented concurrent.futures.ThreadPoolExecutor
-2025-06-17 20:39:23,791 - INFO - AgentOps: Successfully instrumented 'ConcurrentFuturesInstrumentor' for package 'python'.
-2025-06-17 20:39:23,805 - INFO - AgentOps: Successfully instrumented 'AnthropicInstrumentor' for package 'agentops.instrumentation.anthropic'.
-2025-06-17 20:39:23,945 - INFO - AgentOps: Successfully instrumented 'OpenAIInstrumentor' for package 'agentops.instrumentation.openai'.
-2025-06-17 20:39:23,947 - INFO - Session Replay for default trace: https://app.agentops.ai/sessions?trace_id=321faad9615a3812ddd50019f375c7d8
-2025-06-17 20:39:23,947 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=321faad9615a3812ddd50019f375c7d8
-2025-06-17 20:41:02,154 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=321faad9615a3812ddd50019f375c7d8
-2025-06-17 20:41:02,156 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=321faad9615a3812ddd50019f375c7d8
+2025-06-18 09:11:04,283 - INFO - [ConcurrentFuturesInstrumentor] Successfully instrumented concurrent.futures.ThreadPoolExecutor
+2025-06-18 09:11:04,284 - INFO - AgentOps: Successfully instrumented 'ConcurrentFuturesInstrumentor' for package 'python'.
+2025-06-18 09:11:04,299 - INFO - AgentOps: Successfully instrumented 'AnthropicInstrumentor' for package 'agentops.instrumentation.anthropic'.
+2025-06-18 09:11:04,451 - INFO - AgentOps: Successfully instrumented 'OpenAIInstrumentor' for package 'agentops.instrumentation.openai'.
+2025-06-18 09:11:04,452 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=8a76d40c0073f66ac93bc4477b64e570
+2025-06-18 09:11:21,573 - WARNING - ActionEvent() is deprecated and will be removed in v4 in the future. Automatically tracked in v4.
+2025-06-18 09:11:21,573 - WARNING - record() is deprecated and will be removed in v4 in the future. Automatically tracked in v4.
+2025-06-18 09:12:38,794 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=8a76d40c0073f66ac93bc4477b64e570
+2025-06-18 09:12:38,796 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=2d046b52cd86aec43f00e5ddd09699e0
+2025-06-18 09:13:34,680 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=2d046b52cd86aec43f00e5ddd09699e0
+2025-06-18 09:13:34,682 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=e321ed6e53fefc1d7766fbd132646bdc
+2025-06-18 09:14:27,653 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=e321ed6e53fefc1d7766fbd132646bdc
+2025-06-18 09:14:27,655 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=06c9132d7939244c2f283baf2b80c2d7
+2025-06-18 09:16:04,353 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=06c9132d7939244c2f283baf2b80c2d7
+2025-06-18 09:16:04,357 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=dbf72e8b744d67afe27a03c719f9ea90
+2025-06-18 09:16:30,873 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=dbf72e8b744d67afe27a03c719f9ea90
+2025-06-18 09:16:30,874 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=c4221d8fa6119abc5ce0e2d62af00d67
+2025-06-18 09:18:33,916 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=c4221d8fa6119abc5ce0e2d62af00d67
+2025-06-18 09:18:33,919 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=b35f1f6dff43a80dce0a6df5db1ac4ab
+2025-06-18 09:20:32,434 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=b35f1f6dff43a80dce0a6df5db1ac4ab
+2025-06-18 09:20:32,437 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=be4cf02ad52ed22bbe11b87faa187a4e
+2025-06-18 09:21:20,998 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=be4cf02ad52ed22bbe11b87faa187a4e
+2025-06-18 09:21:21,001 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=4bbb243014302a2ad6b6e0a7943d9d99
+2025-06-18 09:21:46,229 - ERROR - Error in sync function execution: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'messages.3: `tool_use` ids were found without `tool_result` blocks immediately after: toolu_018yJEtCdTYQgxGEF8FVgPGo. Each `tool_use` block must have a corresponding `tool_result` block in the next message.'}}
+2025-06-18 09:23:14,463 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=4bbb243014302a2ad6b6e0a7943d9d99
+2025-06-18 09:23:14,465 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=8ea5a9b8822a6eaa57400f4907fe660c
+2025-06-18 09:24:39,625 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=8ea5a9b8822a6eaa57400f4907fe660c
+2025-06-18 09:24:39,628 - INFO - Session Replay for session trace: https://app.agentops.ai/sessions?trace_id=43163e1fb9b6e311d106fb735a85560a
+2025-06-18 09:24:39,808 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:39,987 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:40,136 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:40,295 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:40,610 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:40,866 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:41,116 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:41,274 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:41,425 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:41,705 - ERROR - Error in sync function execution: Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-3-5-haiku-20241022 '}}
+2025-06-18 09:24:42,134 - INFO - Session Replay for session.session trace: https://app.agentops.ai/sessions?trace_id=43163e1fb9b6e311d106fb735a85560a

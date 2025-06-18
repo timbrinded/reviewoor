@@ -288,7 +288,7 @@ def calculate_tool_metrics(tool_calls: List[Dict[str, Any]], test_name: str) -> 
 def benchmark_model(provider: str, model: str, test_cases: Dict[str, str], enable_tools: bool = True) -> ModelMetrics:
     """Benchmark a single model across all test cases"""
     print(f"\n📊 Benchmarking {provider}/{model} (tools={'enabled' if enable_tools else 'disabled'})...")
-    
+
     # Initialize AgentOps for this model
     session_tags = [f"{provider}", f"{model}", "benchmark"]
     if enable_tools:
@@ -333,7 +333,28 @@ def benchmark_model(provider: str, model: str, test_cases: Dict[str, str], enabl
                 tool_accuracy_scores.append(tool_metrics["tool_accuracy"])
                 print(f" ✓ ({len(result.issues)} issues, {elapsed:.2f}s, {len(result.tool_calls)} tool calls)")
             else:
+                tool_metrics = None
                 print(f" ✓ ({len(result.issues)} issues, {elapsed:.2f}s)")
+            
+            # Record per-test metrics to AgentOps
+            test_event = agentops.ActionEvent(
+                action_type="test_case_result",
+                params={
+                    "test_name": test_name,
+                    "model": model,
+                    "provider": provider,
+                    "tools_enabled": enable_tools,
+                    # Include metrics as params for better visibility
+                    "accuracy": round(metrics["accuracy"], 4),
+                    "false_positive_rate": round(metrics["false_positive_rate"], 4),
+                    "issues_found": len(result.issues),
+                    "response_time_seconds": round(elapsed, 2),
+                    "tool_accuracy": round(tool_metrics["tool_accuracy"], 4) if tool_metrics else None,
+                    "tools_used": len(result.tool_calls) if hasattr(result, 'tool_calls') else 0
+                },
+                result="completed"
+            )
+            agentops.record(test_event)
         
         # Calculate averages
         avg_accuracy = sum(accuracy_scores) / len(accuracy_scores) if accuracy_scores else 0
@@ -356,9 +377,43 @@ def benchmark_model(provider: str, model: str, test_cases: Dict[str, str], enabl
             tool_accuracy=avg_tool_accuracy if enable_tools else None
         )
         
+        # Record metrics to AgentOps with all metrics as params for dashboard visibility
+        metrics_event = agentops.ActionEvent(
+            action_type="benchmark_complete",
+            params={
+                # Model info
+                "model": model,
+                "provider": provider,
+                "tools_enabled": enable_tools,
+                
+                # Key performance metrics
+                "accuracy_score": round(avg_accuracy, 4),
+                "false_positive_rate": round(avg_fpr, 4),
+                "tool_accuracy": round(avg_tool_accuracy, 4) if enable_tools else None,
+                
+                # Issue metrics
+                "total_issues_found": total_issues,
+                "critical_issues": all_severities.get("critical", 0),
+                "high_issues": all_severities.get("high", 0),
+                "medium_issues": all_severities.get("medium", 0),
+                "low_issues": all_severities.get("low", 0),
+                
+                # Performance metrics
+                "total_response_time_seconds": round(total_time, 2),
+                "avg_response_time_seconds": round(total_time / len(test_cases), 2),
+                "test_cases_count": len(test_cases),
+                
+                # Tool usage metrics
+                "tools_used_count": len(all_tool_calls),
+                "unique_tools_count": len(unique_tools),
+                "unique_tools": ", ".join(unique_tools) if unique_tools else "none"
+            },
+            result="success"
+        )
+        agentops.record(metrics_event)
+        
         # End AgentOps trace
         agentops.end_trace(end_state="Success")
-        
         return metrics
         
     except Exception as e:
@@ -374,7 +429,8 @@ def main():
     AGENTOPS_API_KEY = os.getenv("AGENTOPS_API_KEY") or 'a0aac5f4-2b60-43c2-bb9e-f79247f5a2dc'
     agentops.init(
         api_key=AGENTOPS_API_KEY,
-        default_tags=['model_benchmark']
+        default_tags=['model_benchmark'],
+        auto_start_session=False
     )
     
     # Models to benchmark
@@ -458,6 +514,54 @@ def main():
         json.dump([m.to_dict() for m in results], f, indent=2)
     
     print(f"\n💾 Results saved to: {output_file}")
+    
+    # Record overall benchmark summary to AgentOps
+    if results:
+        best_model = max(results, key=lambda x: x.accuracy_score or 0)
+        avg_accuracy = sum(r.accuracy_score or 0 for r in results) / len(results)
+        avg_response_time = sum(r.response_time for r in results) / len(results)
+        
+        # Count models by provider
+        provider_counts = {}
+        for r in results:
+            provider_counts[r.provider] = provider_counts.get(r.provider, 0) + 1
+        
+        summary_event = agentops.ActionEvent(
+            action_type="benchmark_summary",
+            params={
+                # Summary stats
+                "models_tested": len(results),
+                "test_cases_per_model": len(TEST_CASES),
+                "total_test_runs": len(results) * len(TEST_CASES),
+                
+                # Best performance
+                "best_model": f"{best_model.provider}/{best_model.model}",
+                "best_accuracy": round(best_model.accuracy_score or 0, 4),
+                
+                # Average metrics
+                "avg_accuracy": round(avg_accuracy, 4),
+                "avg_response_time_seconds": round(avg_response_time, 2),
+                "avg_issues_per_model": round(sum(r.total_issues_found for r in results) / len(results), 1),
+                
+                # Total metrics
+                "total_issues_found": sum(r.total_issues_found for r in results),
+                "total_time_seconds": round(sum(r.response_time for r in results), 2),
+                
+                # Provider breakdown
+                "openai_models_tested": provider_counts.get("openai", 0),
+                "anthropic_models_tested": provider_counts.get("anthropic", 0),
+                
+                # Tool usage summary
+                "models_with_tools": len([r for r in results if r.tools_used > 0]),
+                "avg_tool_accuracy": round(
+                    sum(r.tool_accuracy for r in results if r.tool_accuracy) / 
+                    len([r for r in results if r.tool_accuracy]),
+                    4
+                ) if any(r.tool_accuracy for r in results) else None
+            },
+            result="benchmark_complete"
+        )
+        agentops.record(summary_event)
     
     # Tool usage comparison
     print("\n🔧 Tool Usage Analysis:")
