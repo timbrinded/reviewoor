@@ -52,6 +52,11 @@ uv run examples/01_basic_review.py
 
 # Or run all examples
 cd examples && ./run_all.sh
+
+# Run advanced benchmarking
+./run_benchmark.sh --quick                    # Quick test
+./run_benchmark.sh --openai-only --security-only
+./run_benchmark.sh --all-run-types --save-dataset
 ```
 
 ### Important: Using the uv Ecosystem
@@ -118,9 +123,9 @@ All generated output files (JSON results) are saved to the `output/` directory, 
 
 ## Model Evaluation and Benchmarking
 
-The project includes a comprehensive evaluation framework for comparing model performance:
+The project includes comprehensive evaluation frameworks for comparing model performance:
 
-### Using the Evaluation Framework
+### Basic Evaluation Framework
 
 ```python
 from src.evaluation import quick_benchmark
@@ -134,6 +139,48 @@ results = quick_benchmark([
     ("openai", "gpt-3.5-turbo"),
     ("anthropic", "claude-3-5-sonnet-20241022")
 ])
+```
+
+### Advanced DeepEval Benchmarking
+
+The project includes advanced benchmarking with DeepEval integration:
+
+```bash
+# Quick comparison of models
+./run_benchmark.sh --quick
+
+# Compare different run types (with/without tools, different prompts)
+./run_benchmark.sh --all-run-types --save-dataset
+
+# Focus on specific areas
+./run_benchmark.sh --security-only --security-focused
+./run_benchmark.sh --performance-only --performance-focused
+
+# Test specific models
+./run_benchmark.sh --models "openai:gpt-4o anthropic:claude-3-5-sonnet"
+
+# OpenAI models only
+./run_benchmark.sh --openai-only --all-run-types
+```
+
+### Run Types for Model Comparison
+
+- **standard**: Default configuration with tools enabled
+- **no-tools**: Disable tool usage to test pure reasoning
+- **security-focused**: Custom prompt emphasizing security issues
+- **performance-focused**: Custom prompt emphasizing performance issues
+
+### Dataset Management
+
+```bash
+# List available datasets
+uv run examples/dataset_manager.py list
+
+# Show dataset summary
+uv run examples/dataset_manager.py summary datasets/my_dataset.json
+
+# Merge multiple datasets
+uv run examples/dataset_manager.py merge dataset1.json dataset2.json --output combined
 ```
 
 ### AgentOps Integration
